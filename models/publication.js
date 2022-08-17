@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     const Publication = sequelize.define("publication", {
-      publisher_Id: {
+      publication_Id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,

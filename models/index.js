@@ -15,16 +15,16 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
 });
 const db = {}
 const models = path.join(__dirname) // path to a models' folder
-console.log(models)  
+//console.log(models)  
 const fileList = fs.readdirSync(models).filter(function (file) {
   return (file.indexOf('.') !== 0)  && (file !== 'index.js')
 }).forEach(function (file) {
   const fullName = path.join(__dirname, file)
   const model = sequelize.import(fullName)
-   console.log(model)
+   //console.log(model)
    db[model.name] = model
 })
-console.log("check 1", db)
+//console.log("check 1", db)
 Object.keys(db).forEach(function (modelName) {
     if (db[modelName].associate) {
       db[modelName].associate(db)
@@ -32,5 +32,5 @@ Object.keys(db).forEach(function (modelName) {
 })
 
 db.sequelize = sequelize;
-console.log("check to DB", db)
+//console.log("check to DB", db)
 module.exports = db; 
