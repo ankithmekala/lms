@@ -28,3 +28,5 @@ app.use("/api", publicationRoutes)
 app.listen(3000, function () {
     console.log("Server is running on localhost:3000");
 });
+
+
