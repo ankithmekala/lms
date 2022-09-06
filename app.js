@@ -6,6 +6,10 @@ const categoryRoutes = require("./routes/category.routes.js");
 const reservationRoutes = require("./routes/reservation.routes.js")
 const bookRoutes = require("./routes/book.routes.js");
 const publicationRoutes = require("./routes/publication.routes.js")
+const userRoutes = require("./routes/user.routes.js");
+const feedbackRoutes = require("./routes/feedback.routes.js")
+const roleRoutes = require("./routes/role.routes.js");
+
 const db = require("./models/index.js");
 db.sequelize.sync()
   .then(() => {
@@ -25,6 +29,10 @@ app.use("/api", bookRoutes)
 app.use("/api", reservationRoutes)
 app.use("/api", categoryRoutes)
 app.use("/api", publicationRoutes)
+app.use('/api', userRoutes);
+app.use('/api', feedbackRoutes);
+app.use('/api', roleRoutes);
+
 app.listen(3000, function () {
     console.log("Server is running on localhost:3000");
 });

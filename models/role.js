@@ -1,15 +1,15 @@
 module.exports = (sequelize, DataTypes) => {
-    const Role = sequelize.define("role", {
-      role_Id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-        field:'role_Id'
-      },
-      role_Name: {
-        type: DataTypes.STRING,
-        field:'role_Name'
-      }
-    });
-    return Role;
-  };
+  const Role = sequelize.define("role", {
+    roleId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      field:'roleId'
+    },
+    roleName: {
+      type: DataTypes.STRING,
+      field:'roleName'
+    }
+  });
+  return Role;
+};

@@ -20,7 +20,7 @@ exports.create = (req, res, next) => {
     user_id: req.body.user_id,
     reservation_date: req.body.reservation_date
   };
-  // Save book in the database
+  // Save reservation in the database
   console.log('reservation',reservation)
   Reservation.create(reservation)
     .then(data => {
@@ -54,11 +54,11 @@ exports.findOne = (req, res) => {
         });
       });
 };
-// Delete book with the specified id in the request
+// Delete reservation with the specified id in the request
 exports.delete = (req, res) => {
     const id = req.params.id;
     Reservation.destroy({
-    where: { id: id }
+    where: { reservation_id: id }
   })
     .then(num => {
       if (num == 1) {

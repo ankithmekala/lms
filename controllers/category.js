@@ -1,12 +1,13 @@
 const express = require('express');
 const { message } = require('statuses');
 const db = require("../models");
+const category = require('../models/category');
 const Category = db.category;
 
 //create and save the category
 exports.create = (req, res, next) => {
     //validate request
-    if(!req.body.category_id) {
+    if(!req.body.category_Name) {
         res.status(400).send({
             message: "Content cannot be empty!"
         });
@@ -15,7 +16,7 @@ exports.create = (req, res, next) => {
 
     //create a category
     const category = {
-        category_Id: req.body.category_id,
+        category_id: req.body.category_id,
         category_Name: req.body.category_Name
     };
     Category.create(category)
@@ -51,11 +52,29 @@ exports.findOne = (req, res) => {
     });
 };
 
+//find all categories
+exports.findAll = (req, res) => {
+    const alldata = req.query.category_id;
+    console.log(alldata);
+    var condition = alldata ? { alldata: { [Op.iLike]: `%${alldata}%` } } : null;
+    console.log(condition);
+    Category.findAll({ where: condition })
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while retrieving tutorials."
+        });
+      });
+  };
+
 //Delete category with id 
 exports.delete = (req, res) => {
     const id = req.params.id;
-    Category.destory({
-        where: {id: id}
+    Category.destroy({
+        where: { category_id: id }
     })
     .then(num => {
         if (num == 1) {
@@ -70,7 +89,7 @@ exports.delete = (req, res) => {
     })
     .catch(err => {
         res.status(500).send({
-            message: "Could not Delete category"
+            message: "Could not Delete category with id=" + id
         });
     });
 };
@@ -80,7 +99,7 @@ exports.delete = (req, res) => {
 exports.update = (req, res) => {
     const id = req.params.id;
     Category.update(req.body, {
-      where: { id: id }
+      where: { category_id: id }
     })
       .then(num => {
         if (num == 1) {

@@ -15,7 +15,7 @@ exports.create = (req, res, next) => {
     }
       // Create a publication
     const publisher = {
-        publication_Id: req.body.publication_id,
+        //publication_id: req.body.publication_id,
         publisher_Name: req.body.publisher_Name,
     };
   // Save book in the database
@@ -55,7 +55,7 @@ exports.findOne = (req, res) => {
 exports.delete = (req, res) => {
     const id = req.params.id;
     Publications.destroy({
-       where: { id: id }
+       where: { publication_id: id }
     })
     .then(num => {
       if (num == 1) {

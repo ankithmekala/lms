@@ -1,10 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
     const User = sequelize.define("user", {
-      user_Id: {
+      userId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
-        field:'user_Id'
+        field:'userId'
       },
           
       userName: {
@@ -26,9 +26,9 @@ module.exports = (sequelize, DataTypes) => {
         field: 'date_Of_birth'
   
       },
-      contact_Number: {
+      contactNumber: {
         type: DataTypes.INTEGER,
-        field: 'contact_Number'
+        field: 'contactNumber'
   
       },
       email: {

@@ -15,7 +15,7 @@ exports.create = (req, res, next) => {
     }
       // Create a book
     const book = {
-    book_Id: req.body.book_Id,
+    //book_Id: req.body.book_Id,
     unique_Id: req.body.unique_Id,
     book_Title: req.body.book_Title,
     author: req.body.author,
@@ -36,6 +36,22 @@ exports.create = (req, res, next) => {
     });
 };
 
+exports.findAll = (req, res) => {
+  const alldata = req.query.book_Id;
+  console.log(alldata);
+  var condition = alldata ? { alldata: { [Op.iLike]: `%${alldata}%` } } : null;
+  console.log(condition);
+  Book.findAll({ where: condition })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials."
+      });
+    });
+};
 
 
 // Find a single book with an id
@@ -61,7 +77,7 @@ exports.findOne = (req, res) => {
 exports.delete = (req, res) => {
     const id = req.params.id;
     Book.destroy({
-    where: { id: id }
+    where: { book_Id: id }
   })
     .then(num => {
       if (num == 1) {
@@ -77,6 +93,29 @@ exports.delete = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message: "Could not delete book with id=" + id
+      });
+    });
+};
+
+exports.update = (req, res) => {
+  const id = req.params.id;
+  Book.update(req.body, {
+    where: { book_Id: id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Book was updated successfully."
+        });
+      } else {
+        res.send({
+          message: `Cannot update book with id=${id}.`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error updating book with id=" + id
       });
     });
 };

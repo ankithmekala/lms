@@ -4,6 +4,8 @@ var router = require("express").Router();
 router.post("/category", category.create);
 //get category with id 
 router.get("/category/:id", category.findOne);
+//get all
+router.get("/category", category.findAll);
 //Delete a category with id 
 router.delete("/category/:id", category.delete);
 //update a category 
